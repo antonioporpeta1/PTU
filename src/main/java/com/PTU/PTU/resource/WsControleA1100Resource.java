@@ -1,28 +1,25 @@
 package com.PTU.PTU.resource;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.Api;
-
 import com.PTU.PTU.model.WsControleA1100;
 import com.PTU.PTU.service.WsControleA1100Service;
 import com.PTU.PTU.utils.PTUUtil;
+
+import io.swagger.annotations.Api;
 
 @Api(value = "WsControleA1100")
 @RestController
@@ -33,17 +30,11 @@ public class WsControleA1100Resource {
     WsControleA1100Service wsControleA1100Service;
    
     @CrossOrigin
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
         return wsControleA1100Service.getWsControleA1100(id);
     }
     
-    @CrossOrigin
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<WsControleA1100> saveWsControleA1100(@RequestBody WsControleA1100 wsControleA1100) {
-        return wsControleA1100Service.saveWsControleA1100(wsControleA1100);
-    }
-
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Collection<WsControleA1100>> findAll() {
@@ -56,6 +47,12 @@ public class WsControleA1100Resource {
     public ResponseEntity<Collection<WsControleA1100>> findAllByDtInclusao(@PathVariable String dtInclusao) {
         Collection<WsControleA1100> wsControleA1100List = wsControleA1100Service.findAllByDtInclusao(dtInclusao);
         return new ResponseEntity<>(wsControleA1100List, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<WsControleA1100> saveWsControleA1100(@RequestBody WsControleA1100 wsControleA1100) {
+        return wsControleA1100Service.saveWsControleA1100(wsControleA1100);
     }
     
     @CrossOrigin
