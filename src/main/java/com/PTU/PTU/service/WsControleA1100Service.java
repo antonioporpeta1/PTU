@@ -1,11 +1,13 @@
 package com.PTU.PTU.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,11 +38,16 @@ public class WsControleA1100Service {
         return wsControleA1100;
     }
 
+    public List<WsControleA1100> findAllByDtInclusao(String dtInclusao) {
+        List<WsControleA1100> lstWsControleA1100;
+        lstWsControleA1100 = wsControleA1100Repository.findAllByDtInclusao(dtInclusao);
+        return lstWsControleA1100;
+    }
+
     public WsControleA1100 save(WsControleA1100 wsControleA1100) {
     	wsControleA1100.setDtInclusao(PTUUtil.getLastUpdatedOrCreateDate());
         return wsControleA1100Repository.save(wsControleA1100);
     }
-    
     
     public ResponseEntity saveWsControleA1100(WsControleA1100 wsControleA1100) {
         Map<String, Object> retornaMap;

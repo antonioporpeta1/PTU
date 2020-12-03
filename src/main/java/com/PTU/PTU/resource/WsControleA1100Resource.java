@@ -1,10 +1,12 @@
 package com.PTU.PTU.resource;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +51,13 @@ public class WsControleA1100Resource {
         return new ResponseEntity<>(wsControleA1100List, HttpStatus.OK);
     }
 
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, value = "/dtInclusao/{dtInclusao}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Collection<WsControleA1100>> findAllByDtInclusao(@PathVariable String dtInclusao) {
+        Collection<WsControleA1100> wsControleA1100List = wsControleA1100Service.findAllByDtInclusao(dtInclusao);
+        return new ResponseEntity<>(wsControleA1100List, HttpStatus.OK);
+    }
+    
     @CrossOrigin
     @RequestMapping(method = RequestMethod.PUT)
     public ResponseEntity<WsControleA1100> updateWsControleA1100(@RequestBody WsControleA1100 wsControleA1100Details){
